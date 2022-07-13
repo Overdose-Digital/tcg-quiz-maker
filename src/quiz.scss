@@ -62,6 +62,7 @@ $screenM: 768px;
             color: $colorWhite;
             width: 100%;
             min-height: 50px;
+            min-width: 275px;
             border: 0;
             font-weight: $fontWeightSemiBold;
             font-size: 15px;
@@ -80,7 +81,7 @@ $screenM: 768px;
             text-align: center;
             width: 100%;
             max-width: 320px;
-            padding: 25px;
+            padding: 40px;
             margin: 0 20px;
         }
 
@@ -92,7 +93,7 @@ $screenM: 768px;
             color: $colorBlue2;
             margin-bottom: 25px;
             font-size: 20px;
-            line-height: 15px;
+            line-height: 21px;
         }
     }
 
@@ -288,11 +289,12 @@ $screenM: 768px;
                     font-size: 28px;
                     line-height: 30px;
                     color: $colorBlue2;
-                    max-width: 350px;
+                    max-width: 90%;
 
                     @media screen and (max-width: $screenM) {
-                        font-size: 21px;
-                        line-height: 25px;
+                        font-size: 22px;
+                        line-height: 26px;
+                        max-width: 82%;
                     }
                 }
             }
@@ -366,7 +368,7 @@ $screenM: 768px;
                 background-position: center;
                 background-size: contain;
                 background-repeat: no-repeat;
-                margin-bottom: 7px;
+                margin-bottom: 6px;
             }
         }
 
@@ -388,7 +390,7 @@ $screenM: 768px;
             top: 0;
             bottom: 0;
             background: $colorPopupOverlay;
-            padding: 52px 30px;
+            padding: 51px 30px;
         }
 
         &__learn-more-holder {
@@ -403,6 +405,7 @@ $screenM: 768px;
             @media screen and (max-width: $screenM) {
                 flex-direction: column;
                 max-height: 100%;
+                height: auto;
             }
         }
 
@@ -420,6 +423,7 @@ $screenM: 768px;
                 @media screen and (max-width: $screenM) {
                     padding: 0;
                     order: -1;
+                    height: 183px;
                     min-height: 183px;
                 }
             }
@@ -1471,6 +1475,19 @@ $screenM: 768px;
     height: 100%;
     padding: 40px 10px;
     min-height: 449px;
+
+    & > div {
+        width: 100%;
+    }
+
+    [tid='7'],
+    [tid='5'],
+    [tid='3']{
+        .qp_ao {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    }
 
     .qp_t {
         font-size: 14px;

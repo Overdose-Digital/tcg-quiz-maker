@@ -5,7 +5,7 @@ function quizWidget($) {
         options: {
             getStartedButtonClass: 'quiz-widget__get-started-button',
             getStartedContainerClass: 'quiz-widget__get-started',
-            getStartedText: 'Not sure which bed you need? Take our quick Sleep Selector quiz and well recommended the right bed for you.',
+            getStartedText: 'Not sure which bed you need? Take our quick Sleep Selector quiz and we\'ll recommend the right bed for you.',
             quizTabs: '#quiz-tabs',
             questionTitle: '.qp_qi',
             questionPicture: '.qp_pic',
@@ -490,6 +490,20 @@ function quizWidget($) {
                 setTimeout(function () {
                     quiz.saveQ('E');
                 }, 500)
+            }.bind(this));
+
+            $(document).on('click', '.' + options.learnMoreClass , function (e) {
+                var target = $(e.target);
+                var isLearnMore = target.is('.quiz-widget__learn-more-holder') || target.parents('.quiz-widget__learn-more-holder').length > 0;
+
+                !isLearnMore && this._triggerLearnMoreVisibility(false);
+            }.bind(this));
+
+            $(document).on('click', '.' + options.formWrapperClass , function (e) {
+                var target = $(e.target);
+                var isForm = target.is('.quiz-widget__send-results') || target.parents('.quiz-widget__send-results').length > 0;
+
+                !isForm && this._triggerFormVisibility(false);
             }.bind(this));
 
             $(document).one('click', '.quiz-lc #quiz-back', function () {
