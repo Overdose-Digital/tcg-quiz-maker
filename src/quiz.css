@@ -51,8 +51,9 @@
   padding: 40px;
   margin: 0 20px;
 }
-.qp-win[show="1"] br:last-child {
-  display: none;
+.qp-win[show="1"] br:last-child,
+.qp-win[show="1"] br:nth-child(2) {
+  content: "";
 }
 .qp-win[show="1"] .qp-win-body {
   color: #2E1A47;
@@ -258,6 +259,10 @@
   font-size: 15px;
   line-height: 18px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+#quiz .quiz-widget__get-started-button:hover {
+  background-color: #3F2264;
 }
 #quiz .quiz-widget__get-started {
   display: flex;
@@ -506,14 +511,15 @@
   display: flex;
   align-items: stretch;
   justify-content: space-between;
+  background: #2E1A47;
 }
 #quiz .quiz-widget__warranty-holder {
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 7.05%;
+  column-gap: 6.85%;
   background: #2E1A47;
-  padding: 16px;
+  padding: 16px 10px;
   width: 100%;
 }
 @media screen and (max-width: 768px) {
@@ -577,6 +583,8 @@
   font-size: 14px;
   line-height: 17px;
   text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
 }
 #quiz .quiz-widget__solution {
   max-width: 1243px;
@@ -640,6 +648,11 @@
   text-decoration: none;
   color: #fff;
 }
+@media screen and (max-width: 768px) {
+  #quiz .quiz-widget__solution-column.image a {
+    padding: 7.5px 12.5px 4.5px;
+  }
+}
 #quiz .quiz-widget__solution-column.image img {
   width: 100%;
   height: auto;
@@ -678,17 +691,42 @@
   line-height: 20px;
 }
 #quiz .quiz-widget__solution-text p {
-  margin: 0 0 15px;
+  margin: 0 0 7px;
 }
 #quiz .quiz-widget__solution-text p:last-child {
   margin: 0;
+}
+#quiz .quiz-widget__solution-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 10px 5px;
+  height: 52px;
+  border-radius: 4px;
+  outline: none;
+  font-size: 15px;
+  line-height: 18px;
+  text-transform: uppercase;
+  border: 0;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: normal;
+  background: #2E1A47;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 24px;
+}
+#quiz .quiz-widget__solution-button:hover {
+  background-color: #3F2264;
 }
 #quiz .quiz-widget__solution-link {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 298px;
-  padding: 15px;
+  padding: 14px;
   column-gap: 8px;
   border: 1px solid #2E1A47;
   border-radius: 4px;
@@ -697,7 +735,7 @@
 @media screen and (max-width: 768px) {
   #quiz .quiz-widget__solution-link {
     width: 100%;
-    max-width: 355px;
+    max-width: 335px;
   }
 }
 #quiz .quiz-widget__solution-links {
@@ -778,6 +816,12 @@
   color: #2E1A47;
   margin-bottom: 12px;
 }
+@media screen and (max-width: 768px) {
+  #quiz .quiz-widget__why-is-perfect-item-title {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
 #quiz .quiz-widget__why-is-perfect-item-text {
   font-size: 16px;
   line-height: 20px;
@@ -805,6 +849,13 @@
   min-height: 52px;
   cursor: pointer;
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+#quiz .quiz-widget__find-store-link:hover, #quiz .quiz-widget__email-results-button:hover {
+  background-color: #2E1A47;
+}
+#quiz .quiz-widget__find-store-link:hover *, #quiz .quiz-widget__email-results-button:hover * {
+  color: #fff;
 }
 @media screen and (max-width: 768px) {
   #quiz .quiz-widget__find-store-link, #quiz .quiz-widget__email-results-button {
@@ -830,8 +881,14 @@
 #quiz .quiz-widget__email-results-button-icon {
   background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16.5058 7.42318L11.0002 11.5969L5.49455 7.42318H16.5058ZM18.026 6.39652H3.97436C3.97017 6.39647 3.96597 6.39647 3.96177 6.39652H3.94888C3.66537 6.39652 3.43555 6.62635 3.43555 6.90986V16.2175C3.43555 16.5011 3.66537 16.7309 3.94888 16.7309H18.0514C18.3349 16.7309 18.5648 16.5011 18.5648 16.2175V6.90986C18.5648 6.62635 18.3349 6.39652 18.0514 6.39652H18.0386C18.0344 6.39647 18.0302 6.39647 18.026 6.39652ZM17.5381 7.92891L11.3103 12.6502C11.1269 12.7892 10.8734 12.7892 10.69 12.6502L4.46221 7.92891V15.7042H17.5381V7.92891Z' fill='%232E1A47'/%3E%3C/svg%3E");
 }
+#quiz .quiz-widget__email-results-button:hover .quiz-widget__email-results-button-icon {
+  background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16.5058 7.42318L11.0002 11.5969L5.49455 7.42318H16.5058ZM18.026 6.39652H3.97436C3.97017 6.39647 3.96597 6.39647 3.96177 6.39652H3.94888C3.66537 6.39652 3.43555 6.62635 3.43555 6.90986V16.2175C3.43555 16.5011 3.66537 16.7309 3.94888 16.7309H18.0514C18.3349 16.7309 18.5648 16.5011 18.5648 16.2175V6.90986C18.5648 6.62635 18.3349 6.39652 18.0514 6.39652H18.0386C18.0344 6.39647 18.0302 6.39647 18.026 6.39652ZM17.5381 7.92891L11.3103 12.6502C11.1269 12.7892 10.8734 12.7892 10.69 12.6502L4.46221 7.92891V15.7042H17.5381V7.92891Z' fill='%23fff'/%3E%3C/svg%3E");
+}
 #quiz .quiz-widget__find-store-link-icon {
   background-image: url("data:image/svg+xml,%3Csvg width='23' height='22' viewBox='0 0 23 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M17.4276 9.20795L17.4277 9.22043C17.4261 10.2658 17.1288 11.2894 16.5616 12.1862L12.8689 17.6742C12.7499 17.851 12.5978 18.0031 12.421 18.1221C11.665 18.6308 10.6397 18.4303 10.131 17.6742L6.4297 12.173C5.87107 11.2894 5.57378 10.2658 5.57227 9.20795C5.64015 5.99482 8.29752 3.44374 11.4891 3.50701C14.7023 3.44374 17.3597 5.99482 17.4276 9.20795ZM11.4891 4.6068C8.88264 4.55548 6.72709 6.62481 6.67214 9.21871C6.67345 10.0566 6.91173 10.877 7.35091 11.5721L11.0436 17.0602C11.2132 17.3122 11.5549 17.379 11.807 17.2095C11.8659 17.1698 11.9166 17.1191 11.9562 17.0602L15.6404 11.5852C16.087 10.8788 16.3252 10.0607 16.3277 9.22494C16.2693 6.62151 14.1151 4.55552 11.4891 4.6068ZM11.4999 11.2167C10.1383 11.2167 9.0237 10.1559 9.0237 8.83335C9.0237 7.51082 10.1383 6.45002 11.4999 6.45002C12.8616 6.45002 13.9761 7.51082 13.9761 8.83335C13.9761 10.1559 12.8616 11.2167 11.4999 11.2167ZM11.4999 10.1167C12.2659 10.1167 12.8761 9.53587 12.8761 8.83335C12.8761 8.13083 12.2659 7.55002 11.4999 7.55002C10.7339 7.55002 10.1237 8.13083 10.1237 8.83335C10.1237 9.53587 10.7339 10.1167 11.4999 10.1167Z' fill='%232E1A47'/%3E%3C/svg%3E");
+}
+#quiz .quiz-widget__find-store-link:hover .quiz-widget__find-store-link-icon {
+  background-image: url("data:image/svg+xml,%3Csvg width='23' height='22' viewBox='0 0 23 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M17.4276 9.20795L17.4277 9.22043C17.4261 10.2658 17.1288 11.2894 16.5616 12.1862L12.8689 17.6742C12.7499 17.851 12.5978 18.0031 12.421 18.1221C11.665 18.6308 10.6397 18.4303 10.131 17.6742L6.4297 12.173C5.87107 11.2894 5.57378 10.2658 5.57227 9.20795C5.64015 5.99482 8.29752 3.44374 11.4891 3.50701C14.7023 3.44374 17.3597 5.99482 17.4276 9.20795ZM11.4891 4.6068C8.88264 4.55548 6.72709 6.62481 6.67214 9.21871C6.67345 10.0566 6.91173 10.877 7.35091 11.5721L11.0436 17.0602C11.2132 17.3122 11.5549 17.379 11.807 17.2095C11.8659 17.1698 11.9166 17.1191 11.9562 17.0602L15.6404 11.5852C16.087 10.8788 16.3252 10.0607 16.3277 9.22494C16.2693 6.62151 14.1151 4.55552 11.4891 4.6068ZM11.4999 11.2167C10.1383 11.2167 9.0237 10.1559 9.0237 8.83335C9.0237 7.51082 10.1383 6.45002 11.4999 6.45002C12.8616 6.45002 13.9761 7.51082 13.9761 8.83335C13.9761 10.1559 12.8616 11.2167 11.4999 11.2167ZM11.4999 10.1167C12.2659 10.1167 12.8761 9.53587 12.8761 8.83335C12.8761 8.13083 12.2659 7.55002 11.4999 7.55002C10.7339 7.55002 10.1237 8.13083 10.1237 8.83335C10.1237 9.53587 10.7339 10.1167 11.4999 10.1167Z' fill='%23fff'/%3E%3C/svg%3E");
 }
 #quiz .quiz-widget__upgrades {
   display: flex;
@@ -917,6 +974,11 @@
   text-transform: uppercase;
   color: #2E1A47;
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+#quiz .quiz-widget__upgrades-item-card-content-link:hover {
+  background-color: #2E1A47;
+  color: #fff;
 }
 #quiz .quiz-widget__upgrades-item-title {
   text-align: center;
@@ -935,7 +997,7 @@
   }
 }
 #quiz .quiz-widget__sleep-profile {
-  max-width: 1243px;
+  max-width: 1263px;
   margin: 0 auto;
   text-align: center;
 }
@@ -1213,6 +1275,7 @@
   letter-spacing: 0.37px;
   padding-bottom: 19px;
   border-radius: 0;
+  font-family: "Calibre";
 }
 #quiz .quiz-widget__send-results-question input[type=text]::placeholder,
 #quiz .quiz-widget__send-results-question input[type=email]::placeholder,
@@ -1302,6 +1365,10 @@
   color: #fff;
   max-width: 285px;
   margin: 0 auto;
+  transition: all 0.3s ease;
+}
+#quiz .quiz-widget__send-results-submit:hover {
+  background-color: #3F2264;
 }
 
 #quiz-tabs {
@@ -1522,10 +1589,19 @@
 #quiz-ntabs ~ .qp_bo #quiz-skip input {
   background-color: #fff;
   color: #2E1A47;
+  transition: all 0.3s ease;
+}
+#quiz-ntabs ~ .qp_bo #quiz-skip input:hover {
+  background-color: #2E1A47;
+  color: #fff;
 }
 #quiz-ntabs ~ .qp_bo #quiz-end input {
   background-color: #2E1A47;
   color: #fff;
+  transition: all 0.3s ease;
+}
+#quiz-ntabs ~ .qp_bo #quiz-end input:hover {
+  background-color: #3F2264;
 }
 #quiz-ntabs .qp_tabbtn,
 #quiz-ntabs .qp_instruct {
@@ -1630,7 +1706,7 @@
   width: 100%;
   max-width: 1290px;
   margin: 0 auto;
-  padding: 60px 20px 120px;
+  padding: 60px 20px 104px;
 }
 @media screen and (max-width: 768px) {
   #product-reviews {
@@ -1650,6 +1726,7 @@
     font-size: 22px;
     line-height: 26px;
     margin: 0 auto;
+    max-width: 201px;
   }
 }
 #product-reviews .yotpo.yotpo-main-widget .yotpo-bottomline.yotpo-bottomline-3-boxes .yotpo-bottomline-box-2 .yotpo-star-distribution {
@@ -1671,6 +1748,7 @@
 #product-reviews .main-widget .yotpo-default-button:hover {
   background: #2E1A47 !important;
   color: #fff !important;
+  border: 1px solid #2E1A47 !important;
 }
 #product-reviews .main-widget .yotpo-regular-box {
   border-color: rgba(46, 26, 71, 0.2) !important;
@@ -1787,6 +1865,7 @@
   height: auto !important;
   padding: 0 !important;
   color: #2E1A47 !important;
+  font-size: 43px !important;
 }
 #product-reviews .main-widget .bottom-line-items-container-mobile .bottom-line-items .yotpo-filter-stars {
   float: none !important;
@@ -2284,8 +2363,11 @@
 #product-reviews .write-review .yotpo-header .yotpo-icon {
   color: #2E1A47;
 }
-#product-reviews .yotpo-nav-content .yotpo-reviews-filters {
-  display: none;
+#product-reviews .filters-container .free-text-search-input {
+  padding: 6px 35px 0 35px;
+}
+#product-reviews .more-filters-btn .more-filters-icon {
+  color: #2E1A47 !important;
 }
 #product-reviews .yotpo-star-distribution-content .yotpo-star-distribution-graph.yotpo-distribution-clickable {
   display: flex;
@@ -2305,6 +2387,10 @@
 #product-reviews .yotpo-star-distribution-content .yotpo-star-distribution-graph-score {
   background-color: #2E1A47;
 }
+#product-reviews .yotpo .yotpo-icon-default-star:before,
+#product-reviews .yotpo .yotpo-icon-star:before {
+  color: #2E1A47;
+}
 #product-reviews .yotpo-distibutions-stars {
   display: none;
 }
@@ -2313,7 +2399,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 14px 20px;
+  padding: 14px 20px 8px;
   cursor: pointer;
   text-align: center;
   border-radius: 4px;
@@ -2340,6 +2426,12 @@
 }
 #product-reviews .yotpo-default-button:hover .yotpo-icon-button-text {
   color: #fff !important;
+}
+#product-reviews .yotpo-submit {
+  padding: 14px 20px 8px;
+}
+#product-reviews .yotpo-thank-you {
+  margin-top: 30px !important;
 }
 #product-reviews .yotpo-icon-thumbs-up {
   color: #2E1A47;
@@ -2407,7 +2499,7 @@
 }
 @media only screen and (max-width: 768px) {
   #product-reviews .yotpo .yotpo-default-button {
-    margin: 5px 0 !important;
+    margin: 3px 0 !important;
   }
   #product-reviews .main-widget .bottom-line-items-container-desktop .bottom-line-items-wrapper {
     flex-flow: column nowrap;
@@ -2511,6 +2603,19 @@
     margin-top: 10px;
     margin-bottom: 20px;
   }
+}
+.yotpo.yotpo-display-wrapper.mobile-filters-modal .yotpo-icon-star:before {
+  color: #2E1A47;
+}
+.yotpo.yotpo-display-wrapper.mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-radio-buttons .mobile-filter-radio-button input[type=radio]:checked + .radio-label:before {
+  background-color: #2E1A47;
+  border-color: #2E1A47;
+}
+.yotpo.yotpo-display-wrapper.mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-radio-buttons .mobile-filter-radio-button .radio-selected-color {
+  color: #2E1A47;
+}
+.yotpo.yotpo-display-wrapper.mobile-filters-modal .mobile-filters-footer-btn {
+  background-color: #2E1A47;
 }
 
 /*# sourceMappingURL=quiz.css.map */

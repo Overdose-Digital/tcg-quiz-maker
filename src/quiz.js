@@ -50,7 +50,7 @@ function quizWidget($) {
             var data = localStorage.getItem(this.options.leadsDataStorageKey);
             var object = data && JSON.parse(data);
 
-            if(!object) {
+            if (!object) {
                 return;
             }
 
@@ -59,47 +59,47 @@ function quizWidget($) {
             var questions = this._getLeadsQuestions(object.d);
             var questinsHtml = '';
 
-            $.each(questions, function(i, question) {
+            $.each(questions, function (i, question) {
                 var type = 'text';
 
-                if(question.format === 'Email') {
+                if (question.format === 'Email') {
                     type = 'email';
                 }
 
-                if(question.format === 'Number') {
+                if (question.format === 'Number') {
                     type = 'number';
                 }
 
-                if(question.type === 'Checkboxes') {
+                if (question.type === 'Checkboxes') {
                     type = 'checkbox';
                 }
 
                 var isCheckbox = type === 'checkbox';
-                var label = isCheckbox ?'<label for="' + question.id + '">'+question.question+'</label>': ''
-                var placeholder = isCheckbox? '' : question.question;
-                var controlClass = isCheckbox? 'quiz-widget__send-results-question-control  checkbox': 'quiz-widget__send-results-question-control';
-                var questionClass = isCheckbox? 'quiz-widget__send-results-question  checkbox': 'quiz-widget__send-results-question';
+                var label = isCheckbox ? '<label for="' + question.id + '">' + question.question + '</label>' : ''
+                var placeholder = isCheckbox ? '' : question.question;
+                var controlClass = isCheckbox ? 'quiz-widget__send-results-question-control  checkbox' : 'quiz-widget__send-results-question-control';
+                var questionClass = isCheckbox ? 'quiz-widget__send-results-question  checkbox' : 'quiz-widget__send-results-question';
 
                 questinsHtml +=
-                    '<div class="' + questionClass + '" data-id="'+ question.id  +'">'+
-                        '<div class="'+ controlClass +'">'+
-                            '<input id="' + question.id  + '" type="'+ type +'" placeholder="'+ placeholder +'">' +
-                        '</div>'+
-                        label +
+                    '<div class="' + questionClass + '" data-id="' + question.id + '">' +
+                    '<div class="' + controlClass + '">' +
+                    '<input id="' + question.id + '" type="' + type + '" placeholder="' + placeholder + '">' +
+                    '</div>' +
+                    label +
                     '</div>';
             });
 
             var formHtml = $('' +
-                '<div class="'+ this.options.formWrapperClass +'" style="display: none">' +
-                    '<div class="quiz-widget__send-results">' +
-                        '<button class="'+ this.options.formCloseButtonClass +'"></button>'+
-                        '<div class="quiz-widget__send-results-title">Get your results in your inbox</div>'+
-                        '<div class="quiz-widget__send-results-subtitle">Thanks for completing the Sleep Selector. Enter in your details below and we’ll email you your results straight to your inbox.</div>'+
-                        '<div class="'+ this.options.formQuestionsClass +'">' + questinsHtml +'</div>'+
-                        '<button class="'+ this.options.formSubmitButtonClass +'">submit</button>'+
-                    '</div>'+
-                '</div>'+
-            '');
+                '<div class="' + this.options.formWrapperClass + '" style="display: none">' +
+                '<div class="quiz-widget__send-results">' +
+                '<button class="' + this.options.formCloseButtonClass + '"></button>' +
+                '<div class="quiz-widget__send-results-title">Get your results in your inbox</div>' +
+                '<div class="quiz-widget__send-results-subtitle">Thanks for completing the Sleep Selector. Enter in your details below and we’ll email you your results straight to your inbox.</div>' +
+                '<div class="' + this.options.formQuestionsClass + '">' + questinsHtml + '</div>' +
+                '<button class="' + this.options.formSubmitButtonClass + '">submit</button>' +
+                '</div>' +
+                '</div>' +
+                '');
 
 
             $('#quiz').append(formHtml);
@@ -109,7 +109,7 @@ function quizWidget($) {
             var options = this.options;
             var questions = $('.' + options.formQuestionsClass + ' [data-id]');
 
-            if(!this._validateForm(questions)) {
+            if (!this._validateForm(questions)) {
                 return;
             }
 
@@ -126,9 +126,9 @@ function quizWidget($) {
                 var value = input.val();
                 var queryString = '';
 
-                if(isCheckbox) {
+                if (isCheckbox) {
                     var isChecked = input.is(':checked')
-                    value = isChecked? '1': '';
+                    value = isChecked ? '1' : '';
 
                     queryString = 'Ñ' + id + '¦' + value + '¦';
                 } else {
@@ -141,7 +141,7 @@ function quizWidget($) {
 
             var str = [];
 
-            for (var p in decodedJson){
+            for (var p in decodedJson) {
                 if (decodedJson.hasOwnProperty(p)) {
                     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(decodedJson[p]));
                 }
@@ -181,18 +181,32 @@ function quizWidget($) {
                 var isCheckbox = type === 'checkbox';
                 var value = input.val();
 
-                errorMessage = isEmail? 'Please provide correct email address': 'You must answer the question: ' + this.questions['Q'+ id].question;
+                errorMessage = '';
 
-                if(isCheckbox) {
+                if(+id === 12748425) {
+                    return true
+                }
+
+                if(isEmail) {
+                    errorMessage = 'Please provide correct email address';
+                }else {
+                    if(isCheckbox) {
+                        errorMessage = 'please select: ' + this.questions['Q' + id].question;
+                    }else {
+                        errorMessage = this.questions['Q' + id].question + ' is required';
+                    }
+                }
+
+                if (isCheckbox) {
                     isValid = !!input.is(':checked');
 
                     return isValid;
                 } else {
-                    if(isEmail) {
+                    if (isEmail) {
                         isValid = /(.+)@(.+){2,}\.(.+){2,}/.test(value);
 
                         return isValid;
-                    }else {
+                    } else {
                         isValid = !!value;
 
                         return isValid;
@@ -206,17 +220,17 @@ function quizWidget($) {
         },
 
         _getLeadsQuestions: function (data) {
-            this.decodedJson = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+            this.decodedJson = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
             var questions = this.decodedJson.ans;
 
-            return  questions.split('Ñ').filter(function (question) {
+            return questions.split('Ñ').filter(function (question) {
                 var questionData = question.split('¦');
 
                 return questionData.length > 1 && questionData
-            }).map(function (question){
+            }).map(function (question) {
                 var questionData = question.split('¦');
                 var questionId = 'Q' + questionData[0];
-                var questionFromSchema =  this.questions[questionId];
+                var questionFromSchema = this.questions[questionId];
                 questionFromSchema.savedAnswer = questionData[2];
                 questionFromSchema.id = questionData[0];
 
@@ -353,7 +367,7 @@ function quizWidget($) {
             var styles = config.styles;
             this._removeBaseStyles();
 
-            if(styles) {
+            if (styles) {
                 var link = $("<link/>", {
                     rel: "stylesheet",
                     type: "text/css",
@@ -469,7 +483,7 @@ function quizWidget($) {
                 '</div>' +
 
                 '<button class=' + this.options.getStartedButtonClass + '>Get started</button>' +
-            '</div>';
+                '</div>';
 
             $('.' + this.options.getStartedContainerClass).remove();
             $('.' + config.quizWrapper).prepend(html);
@@ -492,14 +506,14 @@ function quizWidget($) {
                 }, 500)
             }.bind(this));
 
-            $(document).on('click', '.' + options.learnMoreClass , function (e) {
+            $(document).on('click', '.' + options.learnMoreClass, function (e) {
                 var target = $(e.target);
                 var isLearnMore = target.is('.quiz-widget__learn-more-holder') || target.parents('.quiz-widget__learn-more-holder').length > 0;
 
                 !isLearnMore && this._triggerLearnMoreVisibility(false);
             }.bind(this));
 
-            $(document).on('click', '.' + options.formWrapperClass , function (e) {
+            $(document).on('click', '.' + options.formWrapperClass, function (e) {
                 var target = $(e.target);
                 var isForm = target.is('.quiz-widget__send-results') || target.parents('.quiz-widget__send-results').length > 0;
 
@@ -512,7 +526,7 @@ function quizWidget($) {
             }.bind(this));
 
             $(document).on('click', '.quiz-widget__email-results-button', function () {
-               this._triggerFormVisibility(true);
+                this._triggerFormVisibility(true);
             }.bind(this));
 
             $(document).on('click', '.quiz-widget__warranty-button', function (e) {
@@ -521,16 +535,24 @@ function quizWidget($) {
                 var holder = target.siblings('.quiz-widget__warranty-holder');
                 var activeItem = holder.find('.active');
                 var nextActive = activeItem[isNext ? 'next' : 'prev']();
+                var parent = target.parent();
+                var isLastActive = nextActive.is(':last-child');
+                var isFirstActive = nextActive.is(':first-child');
+                var prevButton = parent.find('.prev');
+                var nextButton = parent.find('.next');
 
                 if (nextActive.length > 0) {
                     activeItem.removeClass('active');
                     nextActive.addClass('active');
                 }
+
+                nextButton.css({opacity: isLastActive ? 0 : 1, pointerEvents: isLastActive ? 'none' : 'initial'});
+                prevButton.css({opacity: isFirstActive ? 0 : 1, pointerEvents: isFirstActive ? 'none' : 'initial'});
             });
 
-            $(document).on('click', '.' + this.options.formSubmitButtonClass,  this._sendForm.bind(this));
+            $(document).on('click', '.' + this.options.formSubmitButtonClass, this._sendForm.bind(this));
 
-            $(document).on('click', '.' + this.options.formCloseButtonClass,  function (){
+            $(document).on('click', '.' + this.options.formCloseButtonClass, function () {
                 this._triggerFormVisibility(false);
             }.bind(this));
         },
