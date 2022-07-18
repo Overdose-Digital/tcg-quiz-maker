@@ -413,6 +413,7 @@
   background: none;
   border: 0;
   cursor: pointer;
+  height: 21px;
 }
 #quiz .quiz-widget__learn-more-open:before {
   content: "";
@@ -1458,6 +1459,7 @@
   background: #C8D3DF;
 }
 #quiz-tabs .qp_flex .qp_t input {
+  display: none;
   appearance: none;
   -webkit-appearance: none;
   margin: 0;
@@ -2426,6 +2428,31 @@
 }
 #product-reviews .yotpo-default-button:hover .yotpo-icon-button-text {
   color: #fff !important;
+}
+#product-reviews .yotpo-default-button.desktop-clear-all-btn {
+  float: none;
+  margin-top: 25px;
+}
+#product-reviews .yotpo-default-button.desktop-clear-all-btn:hover .desktop-clear-btn-text {
+  color: #fff;
+}
+#product-reviews .mobile-clear-filters-btn {
+  margin-top: 6px;
+}
+#product-reviews .yotpo-filter-tag {
+  background: #2E1A47;
+  display: inline-flex;
+  align-items: center;
+  column-gap: 5px;
+}
+#product-reviews .yotpo-filter-tag .yotpo-icon {
+  color: #fff;
+}
+#product-reviews .yotpo-filter-tag .yotpo-icon:before {
+  color: #fff;
+}
+#product-reviews .non-default-item-selected {
+  color: #6B6D76;
 }
 #product-reviews .yotpo-submit {
   padding: 14px 20px 8px;
