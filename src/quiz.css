@@ -1697,7 +1697,7 @@
   background: #fff;
 }
 #quiz-results .qp_a ~ .qp_a,
-#quiz-results .qp_q .qp_qi {
+#quiz-results .qp_q {
   display: none;
 }
 #quiz-results .qp_a {
