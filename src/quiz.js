@@ -276,6 +276,22 @@ function quizWidget($) {
             }
         },
 
+        getSelectedQuestionData: function (fromPage) {
+            var questionIndex = fromPage - 1
+            var questionNode = $(this.options.quizTabs + '> div').eq(questionIndex);
+            var questionText = questionNode.find('.qp_qi > div').eq(0).text();
+            var selectedAnswerNode = questionNode.find('[sel=1]');
+            var answerIndex = selectedAnswerNode.parents('.qp_flexc').index();
+            var answerText = selectedAnswerNode.find('.qp_t').text();
+
+            return {
+                questionIndex,
+                questionText,
+                answerIndex,
+                answerText
+            }
+        },
+
         _loadReviews: function () {
             if (!config.reviewsPublicKey) {
                 return
@@ -504,6 +520,14 @@ function quizWidget($) {
                 setTimeout(function () {
                     quiz.saveQ('E');
                 }, 500)
+            }.bind(this));
+
+            $(document).on('click', this.options.quizTabs + ' .qp_flexc', function (e) {
+                var frompage = $(e.currentTarget).parents('.take-q').parent().attr('tid');
+                var prevQuestionData = this.getSelectedQuestionData(frompage);
+                window.dataLayer = window.dataLayer || [];
+                var data = $.extend(prevQuestionData, {'event': 'selected_answer'})
+                window.dataLayer.push(data);
             }.bind(this));
 
             $(document).on('click', '.' + options.learnMoreClass, function (e) {
