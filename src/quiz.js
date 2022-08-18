@@ -263,6 +263,7 @@ function quizWidget($) {
                     if (this._isResultsStep()) {
                         this._buildLoadEmailMeResultsPopup();
                         this._loadReviews();
+                        this.pushFormDataToDataLayer()
                     }
                 }.bind(this));
 
@@ -276,19 +277,80 @@ function quizWidget($) {
             }
         },
 
+        digestMessage: async function (message) {
+            const msgUint8 = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+            return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+        },
+
+        pushFormDataToDataLayer: async function () {
+            var qzData = window.qz.data[Object.keys(window.qz.data)[0]].qObj.schema.questions;
+            var dataLayer = {
+                'event': 'submitted_competition_form',
+            }
+
+            for (var i in Object.values(qzData)) {
+                var q = Object.values(qzData)[i]
+
+                switch (q.question)
+                {
+                    case 'First name':
+                        dataLayer.first_name = q.savedAnswer;
+                        dataLayer.fn = await this.digestMessage(q.savedAnswer)
+                    case 'Last name':
+                        dataLayer.last_name = q.savedAnswer;
+                        dataLayer.ln = await this.digestMessage(q.savedAnswer)
+                    case 'Email address':
+                        var email = decodeURIComponent(q.savedAnswer);
+
+                        dataLayer.email = email;
+                        dataLayer.em = await this.digestMessage(email)
+                    case 'Phone number':
+                        var phone =  q.savedAnswer.replace(/[^\d\+]/g,"");
+
+                        dataLayer.phone = phone;
+                        dataLayer.ph = await this.digestMessage(q.savedAnswer);
+
+                }
+
+                if(q.question.indexOf('tips') !== -1 ) {
+                    dataLayer.email_optin = !!q.answers[0].answer
+                }
+            }
+
+            if(window.userCity) {
+                dataLayer.city = window.userCity;
+            }
+
+            if(window.userCountry) {
+                dataLayer.country = window.userCountry;
+            }
+
+            window.dataLayer.push(dataLayer);
+
+            window.dataLayer.push({
+                'event': 'completed_sleep_selector',
+                'sleep_selector_recommendation': $('.quiz-widget__solution-heading').text(),
+            });
+        },
+
         getSelectedQuestionData: function (fromPage) {
             var questionIndex = fromPage - 1
-            var questionNode = $(this.options.quizTabs + '> div').eq(questionIndex);
+            var questionsNodes = $(this.options.quizTabs + '> div');
+            var totalQuestionsCount = questionsNodes.length;
+            var questionNode = questionsNodes.eq(questionIndex);
             var questionText = questionNode.find('.qp_qi > div').eq(0).text();
             var selectedAnswerNode = questionNode.find('[sel=1]');
             var answerIndex = selectedAnswerNode.parents('.qp_flexc').index();
             var answerText = selectedAnswerNode.find('.qp_t').text();
 
             return {
-                questionIndex,
-                questionText,
-                answerIndex,
-                answerText
+                'event': 'answered_sleep_selector',
+                'sleep_selector_step': `Question ${fromPage} of ${totalQuestionsCount}`,
+                'sleep_selector_question': questionText,
+                'sleep_selector_answer': answerText,
             }
         },
 
@@ -525,8 +587,9 @@ function quizWidget($) {
             $(document).on('click', this.options.quizTabs + ' .qp_flexc', function (e) {
                 var frompage = $(e.currentTarget).parents('.take-q').parent().attr('tid');
                 var prevQuestionData = this.getSelectedQuestionData(frompage);
+                var data = $.extend(prevQuestionData, {'event': 'selected_answer'});
+
                 window.dataLayer = window.dataLayer || [];
-                var data = $.extend(prevQuestionData, {'event': 'selected_answer'})
                 window.dataLayer.push(data);
             }.bind(this));
 
@@ -628,6 +691,10 @@ function quizWidget($) {
             this._triggerProgressBarVisibility(true);
             this._triggerGetStartedVisibility(false);
             this._updateProgressBar();
+
+            window.dataLayer.push({
+                'event': 'started_sleep_selector'
+            });
         }
     }
 
@@ -644,8 +711,23 @@ function incertGTM () {
     })(window,document,'script','dataLayer','GTM-5F7CN2V');
 }
 
+function incertUserIPDetector () {
+    window.geoip = (data) => {
+        window.userCity = data.city;
+        window.userIp = data.ip;
+        window.userCountry = data.country;
+    }
+    var script_tag = document.createElement('script');
+    script_tag.setAttribute("type", "text/javascript");
+    script_tag.setAttribute("src", "https://get.geojs.io/v1/ip/geo.js");
+
+    // Try to find the head, otherwise default to the documentElement
+    (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script_tag);
+}
+
 
 (function () {
+    incertUserIPDetector ()
     incertGTM ()
 // Localize jQuery variable
     var jQuery;
