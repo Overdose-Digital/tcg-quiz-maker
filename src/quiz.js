@@ -286,32 +286,46 @@ function quizWidget($) {
         },
 
         pushFormDataToDataLayer: async function () {
+            window.dataLayer.push({
+                'event': 'completed_sleep_selector',
+                'sleep_selector_recommendation': $('.quiz-widget__solution-heading').text(),
+            });
+
             var qzData = window.qz.data[Object.keys(window.qz.data)[0]].qObj.schema.questions;
+
+            var isFormSent = Object.keys(qzData).filter((item)=>{
+                const q = qzData[item];
+                return q.question === 'Email address' && q.savedAnswer
+            }).length > 0
+
+            if(!isFormSent) {
+                return;
+            }
+
             var dataLayer = {
                 'event': 'submitted_competition_form',
             }
 
             for (var i in Object.values(qzData)) {
-                var q = Object.values(qzData)[i]
+                var q = Object.values(qzData)[i];
+                var answer = q && q.savedAnswer.trim() ? q.savedAnswer : '';
 
                 switch (q.question)
                 {
                     case 'First name':
-                        dataLayer.first_name = q.savedAnswer;
-                        dataLayer.fn = await this.digestMessage(q.savedAnswer)
+                        dataLayer.first_name = answer;
+                        dataLayer.fn = answer ? await this.digestMessage(answer): ''
                     case 'Last name':
-                        dataLayer.last_name = q.savedAnswer;
-                        dataLayer.ln = await this.digestMessage(q.savedAnswer)
+                        dataLayer.last_name = answer;
+                        dataLayer.ln = answer? await this.digestMessage(answer): ''
                     case 'Email address':
-                        var email = decodeURIComponent(q.savedAnswer);
-
-                        dataLayer.email = email;
-                        dataLayer.em = await this.digestMessage(email)
+                        dataLayer.email = decodeURIComponent(answer);
+                        dataLayer.em = answer? await this.digestMessage(answer): ''
                     case 'Phone number':
-                        var phone =  q.savedAnswer.replace(/[^\d\+]/g,"");
+                        var phone =  answer.replace(/[^\d\+]/g,"");
 
                         dataLayer.phone = phone;
-                        dataLayer.ph = await this.digestMessage(q.savedAnswer);
+                        dataLayer.ph = phone? await this.digestMessage(phone): '';
 
                 }
 
@@ -320,20 +334,7 @@ function quizWidget($) {
                 }
             }
 
-            if(window.userCity) {
-                dataLayer.city = window.userCity;
-            }
-
-            if(window.userCountry) {
-                dataLayer.country = window.userCountry;
-            }
-
             window.dataLayer.push(dataLayer);
-
-            window.dataLayer.push({
-                'event': 'completed_sleep_selector',
-                'sleep_selector_recommendation': $('.quiz-widget__solution-heading').text(),
-            });
         },
 
         getSelectedQuestionData: function (fromPage) {
