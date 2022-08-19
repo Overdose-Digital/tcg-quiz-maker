@@ -308,7 +308,7 @@ function quizWidget($) {
 
             for (var i in Object.values(qzData)) {
                 var q = Object.values(qzData)[i];
-                var answer = q && q.savedAnswer.trim() ? q.savedAnswer : '';
+                var answer = q && q.savedAnswer && q.savedAnswer.trim() ? q.savedAnswer : '';
 
                 switch (q.question)
                 {
