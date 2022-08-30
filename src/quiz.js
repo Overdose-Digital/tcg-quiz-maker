@@ -3,6 +3,7 @@ function quizWidget($) {
 
     var quizWidgetObject = {
         options: {
+            mobileBreakpoint: 768,
             getStartedButtonClass: 'quiz-widget__get-started-button',
             getStartedContainerClass: 'quiz-widget__get-started',
             getStartedText: 'Not sure which bed you need? Take our quick Sleep Selector quiz and we\'ll recommend the right bed for you.',
@@ -21,7 +22,12 @@ function quizWidget($) {
             formQuestionsClass: 'quiz-widget__send-results-questions',
             formWrapperClass: 'quiz-widget__send-results-wrapper',
             formSubmitButtonClass: 'quiz-widget__send-results-submit',
-            formCloseButtonClass: 'quiz-widget__send-results-close'
+            formCloseButtonClass: 'quiz-widget__send-results-close',
+            solutionLinksTrigger: '.quiz-widget__solution-links__trigger, .quiz-widget__solution-links__close',
+            solutionLinksWrapper: '.quiz-widget__solution-links__wrapper',
+            solutionLink: '.quiz-widget__solution-link',
+            solutionShift: '.quiz-widget__solution-shift',
+            reviewsPageSwitcher: '.reviews-page__switch-page'
         },
 
         _loadQuiz: function () {
@@ -642,6 +648,41 @@ function quizWidget($) {
 
             $(document).on('click', '.' + this.options.formCloseButtonClass, function () {
                 this._triggerFormVisibility(false);
+            }.bind(this));
+
+            $(document).on('click', this.options.solutionLinksTrigger, function (e) {
+                var $button = $(e.currentTarget);
+                var $wrapper = $button.parents(this.options.solutionLinksWrapper);
+
+                $wrapper.toggleClass('active');
+            }.bind(this));
+
+            $(document).on('click', this.options.solutionLink, function (e) {
+                var $link = $(e.currentTarget);
+                var href = $link.attr('href');
+
+                if(window.innerWidth <= this.options.mobileBreakpoint) {
+                    e.preventDefault();
+
+                    $(this.options.solutionLink).removeClass('active')
+                    $link.addClass('active');
+
+                    $(this.options.solutionShift).attr('href', href)
+                }
+
+            }.bind(this));
+
+
+
+            $(document).on('click', this.options.reviewsPageSwitcher, function (e) {
+                var $button = $(e.currentTarget);
+                var searchAttribute = 'data-product-id';
+                var attribute = $button.attr(searchAttribute);
+                var $searchNode = $('[' + searchAttribute + '=' + attribute + ']')
+                var $allNodesByAttribute =  $('[' + searchAttribute + ']')
+
+                $allNodesByAttribute.removeClass('active');
+                $searchNode.addClass('active');
             }.bind(this));
         },
 
