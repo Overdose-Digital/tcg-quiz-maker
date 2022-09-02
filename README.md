@@ -8,6 +8,7 @@ uglifyjs src/quiz.js --output dist/quizV1.1.7.min.js -c -m
 npm install -g uglifycss
 
 ### Apply uglify css
-uglifycss src/quiz.css --output dist/quizV1.1.7.min.css
+uglifycss src/sleepMaker.css --output dist/sleepMakerV1.0.0.min.css
+uglifycss src/sleepyHead.css --output dist/sleepyHeadV1.0.0.min.css
 
 ## Don't forget change versions

@@ -661,7 +661,7 @@ function quizWidget($) {
                 var $link = $(e.currentTarget);
                 var href = $link.attr('href');
 
-                if(window.innerWidth <= this.options.mobileBreakpoint) {
+                if(window.innerWidth <= this.options.mobileBreakpoint && config.projectName === 'sleepMaker') {
                     e.preventDefault();
 
                     $(this.options.solutionLink).removeClass('active')
