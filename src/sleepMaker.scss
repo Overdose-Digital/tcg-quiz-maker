@@ -597,6 +597,7 @@ $screenM: 768px;
             align-items: stretch;
             justify-content: space-between;
             background: $colorWhite;
+            border-top: 1px solid $colorGray6;
 
             &-holder {
                 display: flex;
@@ -606,7 +607,6 @@ $screenM: 768px;
                 background: $colorWhite;
                 padding: 16px 10px;
                 width: 100%;
-                border-top: 1px solid $colorGray6;
 
                 @media screen and (max-width: $screenM) {
                     overflow-x: auto;

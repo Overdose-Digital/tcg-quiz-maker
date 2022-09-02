@@ -513,6 +513,7 @@
   align-items: stretch;
   justify-content: space-between;
   background: #fff;
+  border-top: 1px solid #E6E6E6;
 }
 #quiz .quiz-widget__warranty-holder {
   display: flex;
@@ -522,7 +523,6 @@
   background: #fff;
   padding: 16px 10px;
   width: 100%;
-  border-top: 1px solid #E6E6E6;
 }
 @media screen and (max-width: 768px) {
   #quiz .quiz-widget__warranty-holder {
