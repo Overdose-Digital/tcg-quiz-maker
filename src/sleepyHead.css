@@ -1918,6 +1918,7 @@
   overflow: hidden;
 }
 #product-reviews .main-widget .write-question-review-buttons-container {
+  display: none;
   padding-right: 10px !important;
   padding-left: 10px !important;
   float: none !important;
