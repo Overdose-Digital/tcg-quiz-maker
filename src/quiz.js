@@ -305,6 +305,10 @@ function quizWidget($) {
             }).length > 0
 
             if(!isFormSent) {
+                window.dataLayer.push({
+                    'event': 'skipped_competition_form'
+                });
+
                 return;
             }
 
