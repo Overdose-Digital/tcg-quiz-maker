@@ -199,6 +199,7 @@
   #quiz-back {
     left: auto;
     right: calc(50% + 8px);
+    overflow: hidden;
   }
 }
 #quiz-back:after {
@@ -211,6 +212,7 @@
   #quiz-next {
     right: auto;
     left: calc(50% + 8px);
+    overflow: hidden;
   }
 }
 #quiz .quiz-widget__wrapper {
@@ -1286,6 +1288,7 @@
   line-height: 20px;
   letter-spacing: 0.37px;
   color: #9B94AD;
+  text-transform: capitalize;
 }
 #quiz .quiz-widget__send-results-question input[type=checkbox] {
   margin: 0;
@@ -1473,6 +1476,9 @@
   align-items: stretch;
   justify-content: center;
   margin-bottom: 32px;
+}
+#quiz-tabs .qp_qi code {
+  display: none;
 }
 
 #quiz-ntabs {

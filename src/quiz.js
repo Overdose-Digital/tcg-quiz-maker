@@ -388,6 +388,8 @@ function quizWidget($) {
         _replacePlaceholders: function () {
             var placeholders = [
                 {old: 'Enter number here', new: 'Phone number'},
+                {old: 'First Name', new: 'First name'},
+                {old: 'Last Name', new: 'Last name'},
                 {old: 'Email', new: 'Email address'}
             ]
 

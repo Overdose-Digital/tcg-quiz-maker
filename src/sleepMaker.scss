@@ -256,6 +256,7 @@ $screenM: 768px;
         @media screen and (max-width: $screenM) {
             left: auto;
             right: calc(50% + 8px);
+            overflow: hidden;
         }
 
         &:after {
@@ -269,6 +270,7 @@ $screenM: 768px;
         @media screen and (max-width: $screenM) {
             right: auto;
             left: calc(50% + 8px);
+            overflow: hidden;
         }
     }
 
@@ -605,7 +607,8 @@ $screenM: 768px;
                 justify-content: center;
                 column-gap: 6.85%;
                 background: $colorWhite;
-                padding: 16px 10px;
+                padding: 10px;
+                min-height: 66px;
                 width: 100%;
 
                 @media screen and (max-width: $screenM) {
@@ -904,7 +907,7 @@ $screenM: 768px;
                         line-height: 30px;
                         text-align: center;
                         color: $colorBlue2;
-                        padding: 0 40px;
+                        padding: 0 15px;
                         margin-bottom: 20px;
 
                         @media screen and (min-width: $screenM + 1) {
@@ -931,7 +934,6 @@ $screenM: 768px;
                         line-height: 20px;
                         color: $colorGray1;
                         margin-bottom: 10px;
-                        padding-right: 40px;
                         text-align: left;
 
                         @media screen and (min-width: $screenM + 1) {
@@ -1520,7 +1522,7 @@ $screenM: 768px;
                 position: absolute;
                 cursor: pointer;
                 right: 12px;
-                top: 12px;
+                top: 28px;
                 background: none;
                 padding: 0;
                 margin: 0;
@@ -1563,8 +1565,9 @@ $screenM: 768px;
                 @media screen and (max-width: $screenM) {
                     font-size: 22px;
                     line-height: 26px;
-                    max-width: 233px;
-                    margin: 0 auto 16px;
+                    max-width: 62%;
+                    margin-bottom: 16px;
+                    text-align: left;
                 }
             }
 
@@ -1576,8 +1579,8 @@ $screenM: 768px;
                 max-width: 527px;
 
                 @media screen and (max-width: $screenM) {
-                    margin-bottom: 30px;
-                    padding: 0 7px;
+                    margin: 0 0 30px;
+                    text-align: left;
                 }
             }
 
@@ -1859,6 +1862,10 @@ $screenM: 768px;
         align-items: stretch;
         justify-content: center;
         margin-bottom: 32px;
+
+        code {
+            display: none;
+        }
     }
 }
 
