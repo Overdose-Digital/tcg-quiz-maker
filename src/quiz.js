@@ -267,9 +267,10 @@ function quizWidget($) {
                     this._removeBaseStyles();
 
                     if (this._isResultsStep()) {
+                        this._fixTitle()
                         this._buildLoadEmailMeResultsPopup();
                         this._loadReviews();
-                        this.pushFormDataToDataLayer()
+                        this.pushFormDataToDataLayer();
                     }
                 }.bind(this));
 
@@ -281,6 +282,16 @@ function quizWidget($) {
                     this._updateProgressBar(question.frompage - 1);
                 }.bind(this));
             }
+        },
+
+        _fixTitle: function () {
+            const $heading = $('.quiz-widget__solution-heading');
+            const titleText = $heading.text()
+                .replaceAll('Not sure', '')
+                .replaceAll('Not Sure', '')
+                .replaceAll('not sure', '');
+
+            $heading.text(titleText)
         },
 
         digestMessage: async function (message) {
