@@ -545,6 +545,7 @@
   padding: 5px;
   font-size: 0;
   outline: none;
+  opacity: 1 !important;
 }
 @media screen and (max-width: 768px) {
   #quiz .quiz-widget__warranty-button {
@@ -640,34 +641,13 @@
   position: relative;
 }
 #quiz .quiz-widget__solution-column.image a {
-  display: flex;
-  align-items: center;
-  column-gap: 7px;
   position: absolute;
   left: 13px;
   top: 14px;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background: #2E1A47;
-  border-radius: 16px;
-  padding: 7.5px 7px 4.5px;
-  text-decoration: none;
-  color: #fff;
 }
-#quiz .quiz-widget__solution-column.image a::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1px solid #fff;
-  margin-bottom: 4px;
-}
-@media screen and (max-width: 768px) {
-  #quiz .quiz-widget__solution-column.image a {
-    padding: 7.5px 12.5px 4.5px;
-  }
+#quiz .quiz-widget__solution-column.image a img {
+  max-width: initial;
+  min-width: initial;
 }
 #quiz .quiz-widget__solution-column.image img {
   width: 100%;
@@ -748,12 +728,32 @@
   border: 1px solid #2E1A47;
   border-radius: 4px;
   text-decoration: none;
+  max-height: 53px;
 }
 @media screen and (max-width: 768px) {
   #quiz .quiz-widget__solution-link {
     width: 100%;
     max-width: 335px;
     padding: 7.5px;
+    min-height: 40px;
+  }
+}
+#quiz .quiz-widget__solution-link-icon img {
+  max-width: 124px;
+  height: auto;
+}
+@media screen and (max-width: 768px) {
+  #quiz .quiz-widget__solution-link-icon img {
+    max-width: 106px;
+  }
+  #quiz .quiz-widget__solution-link-icon img[alt=forty-winks] {
+    background-color: #9B94AD;
+    border-radius: 5px;
+  }
+  #quiz .quiz-widget__solution-link-icon img[alt=david-jones] {
+    background-color: #9B94AD;
+    border-radius: 5px;
+    padding: 5px;
   }
 }
 #quiz .quiz-widget__solution-links {
@@ -1003,6 +1003,8 @@
   text-transform: uppercase;
   color: #2E1A47;
   margin-bottom: 12px;
+  height: 30px;
+  overflow: hidden;
 }
 @media screen and (max-width: 768px) {
   #quiz .quiz-widget__why-is-perfect-item-title {

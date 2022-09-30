@@ -644,21 +644,17 @@ function quizWidget($) {
                 var target = $(e.target);
                 var isNext = target.hasClass('next');
                 var holder = target.siblings('.quiz-widget__warranty-holder');
+                var warrantyItems = holder.find('.quiz-widget__warranty-item');
                 var activeItem = holder.find('.active');
                 var nextActive = activeItem[isNext ? 'next' : 'prev']();
-                var parent = target.parent();
-                var isLastActive = nextActive.is(':last-child');
-                var isFirstActive = nextActive.is(':first-child');
-                var prevButton = parent.find('.prev');
-                var nextButton = parent.find('.next');
+
+                activeItem.removeClass('active');
 
                 if (nextActive.length > 0) {
-                    activeItem.removeClass('active');
                     nextActive.addClass('active');
+                } else {
+                    warrantyItems[isNext? 'first': 'last']().addClass('active');
                 }
-
-                nextButton.css({opacity: isLastActive ? 0 : 1, pointerEvents: isLastActive ? 'none' : 'initial'});
-                prevButton.css({opacity: isFirstActive ? 0 : 1, pointerEvents: isFirstActive ? 'none' : 'initial'});
             });
 
             $(document).on('click', '.' + this.options.formSubmitButtonClass, this._sendForm.bind(this));

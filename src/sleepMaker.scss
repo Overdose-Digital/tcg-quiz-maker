@@ -629,6 +629,7 @@ $screenM: 768px;
                 padding: 5px;
                 font-size: 0;
                 outline: none;
+                opacity: 1!important;
 
                 @media screen and (max-width: $screenM) {
                     display: flex;
@@ -736,33 +737,13 @@ $screenM: 768px;
                     position: relative;
 
                     a {
-                        display: flex;
-                        align-items: center;
-                        column-gap: 7px;
                         position: absolute;
                         left: 13px;
                         top: 14px;
-                        font-size: 12px;
-                        line-height: 14px;
-                        letter-spacing: 1px;
-                        text-transform: uppercase;
-                        background: $colorBlue2;
-                        border-radius: 16px;
-                        padding: 7.5px 7px 4.5px;
-                        text-decoration: none;
-                        color: $colorWhite;
 
-                        &::before {
-                            content: '';
-                            width: 10px;
-                            height: 10px;
-                            border-radius: 50%;
-                            border: 1px solid $colorWhite;
-                            margin-bottom: 4px;
-                        }
-
-                        @media screen and (max-width: $screenM) {
-                            padding: 7.5px 12.5px 4.5px;
+                        img {
+                            max-width: initial;
+                            min-width: initial;
                         }
                     }
 
@@ -853,11 +834,35 @@ $screenM: 768px;
                 border: 1px solid $colorBlue2;
                 border-radius: 4px;
                 text-decoration: none;
+                max-height: 53px;
 
                 @media screen and (max-width: $screenM) {
                     width: 100%;
                     max-width: 335px;
                     padding: 7.5px;
+                    min-height: 40px;
+                }
+
+                &-icon {
+                    img {
+                        max-width: 124px;
+                        height: auto;
+
+                        @media screen and (max-width: $screenM) {
+                            max-width: 106px;
+
+                            &[alt="forty-winks"] {
+                                background-color: $colorGray2;
+                                border-radius: 5px;
+                            }
+
+                            &[alt="david-jones"] {
+                                background-color: $colorGray2;
+                                border-radius: 5px;
+                                padding: 5px;
+                            }
+                        }
+                    }
                 }
 
                 &s {
@@ -1121,6 +1126,8 @@ $screenM: 768px;
                     text-transform: uppercase;
                     color: $colorBlue2;
                     margin-bottom: 12px;
+                    height: 30px;
+                    overflow: hidden;
 
                     @media screen and (max-width: $screenM) {
                         font-size: 14px;
