@@ -228,8 +228,11 @@
 #quiz .quiz-widget__wrapper button,
 #quiz .quiz-widget__wrapper textarea,
 #quiz .quiz-widget__wrapper input {
-  display: block;
   font-family: "Calibre";
+}
+#quiz .quiz-widget__wrapper textarea,
+#quiz .quiz-widget__wrapper input {
+  display: block;
   appearance: auto;
 }
 #quiz .quiz-widget__wrapper #quiz-tabs h3,
@@ -415,7 +418,6 @@
   background-repeat: no-repeat;
 }
 #quiz .quiz-widget__learn-more-open {
-  display: inline-block !important;
   padding: 0;
   background: none;
   border: 0;

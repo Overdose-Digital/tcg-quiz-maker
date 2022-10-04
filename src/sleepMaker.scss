@@ -288,8 +288,12 @@ $screenM: 768px;
             button,
             textarea,
             input {
-                display: block;
                 font-family: $fontFamilyPrimary;
+            }
+
+            textarea,
+            input {
+                display: block;
                 appearance: auto;
             }
 
@@ -490,7 +494,6 @@ $screenM: 768px;
         }
 
         &__learn-more-open {
-            display: inline-block!important;
             padding: 0;
             background: none;
             border: 0;
