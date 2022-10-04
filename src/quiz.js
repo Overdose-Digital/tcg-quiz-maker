@@ -47,6 +47,16 @@ function quizWidget($) {
                         return document.qzScript ? qz.xSend(n, t, i) : xSend(n, t, i);
                     };
 
+                    quiz.setErr = function(n, t) {
+                        var i = quiz.obj(".take-q[qid='" + n + "']", 2), r;
+                        i && (quiz.scrolltabs ? quiz.scrollToTab(i.parentNode.idx) : (r = quiz.tbox.style,
+                            r.overflow = "visible",
+                            r.overflow = ""),
+                            i.setAttribute("err", 1),
+                        quiz.msgL[0] && quiz.obj(".take-q[qid='" + n + "'] > SPAN:last-of-type", 2).setAttribute("emsg", quiz.msgL[0]),
+                        t && t.focus && t.focus())
+                    }
+
                     self._init();
                 }
             });
