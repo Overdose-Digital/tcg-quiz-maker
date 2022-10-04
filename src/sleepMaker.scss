@@ -288,6 +288,7 @@ $screenM: 768px;
             button,
             textarea,
             input {
+                display: block;
                 font-family: $fontFamilyPrimary;
                 appearance: auto;
             }

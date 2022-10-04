@@ -228,6 +228,7 @@
 #quiz .quiz-widget__wrapper button,
 #quiz .quiz-widget__wrapper textarea,
 #quiz .quiz-widget__wrapper input {
+  display: block;
   font-family: "Calibre";
   appearance: auto;
 }
