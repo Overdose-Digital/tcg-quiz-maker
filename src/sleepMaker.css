@@ -415,6 +415,7 @@
   background-repeat: no-repeat;
 }
 #quiz .quiz-widget__learn-more-open {
+  display: inline-block !important;
   padding: 0;
   background: none;
   border: 0;
