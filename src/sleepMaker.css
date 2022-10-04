@@ -37,6 +37,7 @@
   font-size: 15px;
   line-height: 18px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 .qp-win[show="1"] .qp-win-y {
   text-decoration: none;
@@ -225,8 +226,10 @@
   padding: 0 20px;
 }
 #quiz .quiz-widget__wrapper button,
+#quiz .quiz-widget__wrapper textarea,
 #quiz .quiz-widget__wrapper input {
   font-family: "Calibre";
+  appearance: auto;
 }
 #quiz .quiz-widget__wrapper #quiz-tabs h3,
 #quiz .quiz-widget__wrapper #quiz-tabs .qp_qi > div {
@@ -685,6 +688,7 @@
   color: #777777;
   font-size: 16px;
   line-height: 20px;
+  margin-top: 15px;
 }
 #quiz .quiz-widget__solution-text p {
   margin: 0 0 7px;
@@ -1123,6 +1127,7 @@
 }
 #quiz .quiz-widget__upgrades-item-card-image img {
   display: block;
+  max-width: initial;
 }
 #quiz .quiz-widget__upgrades-item-card-content {
   display: flex;
@@ -1699,6 +1704,7 @@
   -webkit-appearance: none;
   margin: 0;
 }
+#quiz-ntabs > .sel > div textarea,
 #quiz-ntabs > .sel > div input[type=text],
 #quiz-ntabs > .sel > div input[type=email],
 #quiz-ntabs > .sel > div input[type=tel],
@@ -1715,6 +1721,7 @@
   padding-bottom: 19px;
   border-radius: 0;
 }
+#quiz-ntabs > .sel > div textarea::placeholder,
 #quiz-ntabs > .sel > div input[type=text]::placeholder,
 #quiz-ntabs > .sel > div input[type=email]::placeholder,
 #quiz-ntabs > .sel > div input[type=tel]::placeholder,
@@ -1723,6 +1730,13 @@
   line-height: 20px;
   letter-spacing: 0.37px;
   color: #9B94AD;
+}
+#quiz-ntabs > .sel > div textarea {
+  border: 1px solid #9B94AD;
+  resize: none;
+  height: 170px;
+  padding: 5px;
+  border-radius: 3px;
 }
 #quiz-ntabs > .sel > div:nth-child(2), #quiz-ntabs > .sel > div:nth-child(3) {
   width: 50%;

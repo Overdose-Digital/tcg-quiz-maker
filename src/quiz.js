@@ -40,7 +40,7 @@ function quizWidget($) {
                 parent: config.quizParent,
                 onCreate: function (quizData) {
                     self.questions = quizData.schema.questions;
-
+                    quiz.scrollTo = ()=>{};
                     quiz.xSend = function (n, t, i) {
                         var isLeads = !!n && !!n.d && $('#quiz-ntabs').length > 0;
                         isLeads && self._setLeadsDataToStorage(n);
@@ -66,6 +66,13 @@ function quizWidget($) {
             var questinsHtml = '';
 
             $.each(questions, function (i, question) {
+                if(
+                    question.question.includes('terms-and-conditions') ||
+                    question.question.includes('Tell us')
+                ) {
+                    return;
+                }
+
                 var type = 'text';
 
                 if (question.format === 'Email') {
@@ -285,13 +292,18 @@ function quizWidget($) {
         },
 
         _fixTitle: function () {
-            const $heading = $('.quiz-widget__solution-heading');
-            const titleText = $heading.text()
-                .replaceAll('Not sure', '')
-                .replaceAll('Not Sure', '')
-                .replaceAll('not sure', '');
+            const $feel = $('.quiz-widget__solution-sub-heading[data-subtitle="feel"]');
+            const $size = $('.quiz-widget__solution-sub-heading[data-subtitle="size"]');
 
-            $heading.text(titleText)
+            const feelText = $feel.text().toLowerCase()
+                .replaceAll('it varies', 'medium')
+                .replaceAll('not sure', 'medium')
+
+            $feel.text(feelText)
+
+            if($size.text().toLowerCase().includes('not sure')) {
+                $size.remove();
+            }
         },
 
         digestMessage: async function (message) {
@@ -401,14 +413,16 @@ function quizWidget($) {
                 {old: 'Enter number here', new: 'Phone number'},
                 {old: 'First Name', new: 'First name'},
                 {old: 'Last Name', new: 'Last name'},
-                {old: 'Email', new: 'Email address'}
+                {old: 'Email', new: 'Email address'},
+                {old: 'Enter text here', new: 'Tell us in 300 characters or less why you should win and what you would buy with the $500 Prezzee Gift Card.', maxlength: '300'}
             ]
 
             for (var i in placeholders) {
                 var placeholder = placeholders[i];
-                var el = $('input[placeholder="' + placeholder.old + '"]');
+                var el = $('input[placeholder="' + placeholder.old + '"], textarea[placeholder="' + placeholder.old + '"]');
 
                 el.length && el.attr('placeholder', placeholder.new);
+                el.length && placeholder.maxlength && el.attr('maxlength', placeholder.maxlength);
             }
         },
 

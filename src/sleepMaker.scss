@@ -73,6 +73,7 @@ $screenM: 768px;
             font-size: 15px;
             line-height: 18px;
             cursor: pointer;
+            box-sizing: border-box;
         }
 
         .qp-win-y {
@@ -285,8 +286,10 @@ $screenM: 768px;
             padding: 0 20px;
 
             button,
+            textarea,
             input {
                 font-family: $fontFamilyPrimary;
+                appearance: auto;
             }
 
             #quiz-tabs {
@@ -786,6 +789,7 @@ $screenM: 768px;
                 color: $colorGray1;
                 font-size: 16px;
                 line-height: 20px;
+                margin-top: 15px;
 
                 p {
                     margin: 0 0 7px;
@@ -1268,6 +1272,7 @@ $screenM: 768px;
                     &-image {
                         img {
                             display: block;
+                            max-width: initial;
                         }
                     }
 
@@ -1910,6 +1915,7 @@ $screenM: 768px;
                 }
             }
 
+            textarea,
             input[type="text"],
             input[type="email"],
             input[type="tel"],
@@ -1932,6 +1938,14 @@ $screenM: 768px;
                     letter-spacing: 0.37px;
                     color: $colorGray2;
                 }
+            }
+
+            textarea {
+                border: 1px solid $colorGray2;
+                resize: none;
+                height: 170px;
+                padding: 5px;
+                border-radius: 3px;
             }
 
             &:nth-child(2), //First name, Last Name
