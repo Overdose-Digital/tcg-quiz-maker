@@ -849,7 +849,7 @@ $screenM: 768px;
 
                 &-icon {
                     img {
-                        max-width: 124px;
+                        max-width: 144px;
                         height: auto;
 
                         @media screen and (max-width: $screenM) {
@@ -1011,6 +1011,8 @@ $screenM: 768px;
                                         background: $colorWhite;
                                         column-gap: 2%;
                                         padding: 26px 20px;
+                                        max-height: 98vh;
+                                        overflow-y: auto;
                                     }
                                 }
                             }

@@ -743,7 +743,7 @@
   }
 }
 #quiz .quiz-widget__solution-link-icon img {
-  max-width: 124px;
+  max-width: 144px;
   height: auto;
 }
 @media screen and (max-width: 768px) {
@@ -901,6 +901,8 @@
     background: #fff;
     column-gap: 2%;
     padding: 26px 20px;
+    max-height: 98vh;
+    overflow-y: auto;
   }
 }
 #quiz .quiz-widget__solution-link-text {
