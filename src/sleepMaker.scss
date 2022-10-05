@@ -859,17 +859,6 @@ $screenM: 768px;
 
                         @media screen and (max-width: $screenM) {
                             max-width: 106px;
-
-                            &[alt="forty-winks"] {
-                                background-color: $colorGray2;
-                                border-radius: 5px;
-                            }
-
-                            &[alt="david-jones"] {
-                                background-color: $colorGray2;
-                                border-radius: 5px;
-                                padding: 5px;
-                            }
                         }
                     }
                 }

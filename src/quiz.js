@@ -307,9 +307,12 @@ function quizWidget($) {
 
             const feelText = $feel.text().toLowerCase()
                 .replaceAll('it varies', 'medium')
-                .replaceAll('not sure', 'medium')
 
-            $feel.text(feelText)
+            if($feel.text().toLowerCase().includes('not sure')) {
+                $feel.remove();
+            } else {
+                $feel.text(feelText);
+            }
 
             if($size.text().toLowerCase().includes('not sure')) {
                 $size.remove();

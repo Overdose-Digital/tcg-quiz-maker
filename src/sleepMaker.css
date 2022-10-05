@@ -754,15 +754,6 @@
   #quiz .quiz-widget__solution-link-icon img {
     max-width: 106px;
   }
-  #quiz .quiz-widget__solution-link-icon img[alt=forty-winks] {
-    background-color: #9B94AD;
-    border-radius: 5px;
-  }
-  #quiz .quiz-widget__solution-link-icon img[alt=david-jones] {
-    background-color: #9B94AD;
-    border-radius: 5px;
-    padding: 5px;
-  }
 }
 #quiz .quiz-widget__solution-links {
   display: flex;
