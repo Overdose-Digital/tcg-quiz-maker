@@ -652,17 +652,13 @@
   left: 13px;
   top: 14px;
 }
-#quiz .quiz-widget__solution-column.image a img {
-  max-width: initial;
-  min-width: initial;
-}
-#quiz .quiz-widget__solution-column.image img {
+#quiz .quiz-widget__solution-column.image > img {
   width: 100%;
   height: auto;
   min-width: 430px;
 }
 @media screen and (max-width: 768px) {
-  #quiz .quiz-widget__solution-column.image img {
+  #quiz .quiz-widget__solution-column.image > img {
     min-width: 100%;
   }
 }

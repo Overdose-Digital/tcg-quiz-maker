@@ -748,14 +748,9 @@ $screenM: 768px;
                         position: absolute;
                         left: 13px;
                         top: 14px;
-
-                        img {
-                            max-width: initial;
-                            min-width: initial;
-                        }
                     }
 
-                    img {
+                    > img {
                         width: 100%;
                         height: auto;
                         min-width: 430px;
