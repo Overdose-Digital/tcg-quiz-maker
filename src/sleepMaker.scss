@@ -305,7 +305,6 @@ $screenM: 768px;
                     font-size: 28px;
                     line-height: 30px;
                     color: $colorBlue2;
-                    max-width: 90%;
 
                     @media screen and (max-width: $screenM) {
                         font-size: 22px;
@@ -1264,6 +1263,8 @@ $screenM: 768px;
                         img {
                             display: block;
                             max-width: initial;
+                            width: 123px;
+                            height: auto;
                         }
                     }
 

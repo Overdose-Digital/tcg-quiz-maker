@@ -242,7 +242,6 @@
   font-size: 28px;
   line-height: 30px;
   color: #2E1A47;
-  max-width: 90%;
 }
 @media screen and (max-width: 768px) {
   #quiz .quiz-widget__wrapper #quiz-tabs h3,
@@ -1121,6 +1120,8 @@
 #quiz .quiz-widget__upgrades-item-card-image img {
   display: block;
   max-width: initial;
+  width: 123px;
+  height: auto;
 }
 #quiz .quiz-widget__upgrades-item-card-content {
   display: flex;

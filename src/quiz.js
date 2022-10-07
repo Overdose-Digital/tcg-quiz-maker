@@ -6,7 +6,7 @@ function quizWidget($) {
             mobileBreakpoint: 768,
             getStartedButtonClass: 'quiz-widget__get-started-button',
             getStartedContainerClass: 'quiz-widget__get-started',
-            getStartedText: 'Not sure which bed you need? Take our quick Sleep Selector quiz and we\'ll recommend the right bed for you.',
+            getStartedText: config.getStartedText || 'Not sure which bed you need? Take our quick Sleep Selector quiz and we\'ll recommend the right bed for you.',
             quizTabs: '#quiz-tabs',
             questionTitle: '.qp_qi',
             questionPicture: '.qp_pic',
@@ -306,15 +306,15 @@ function quizWidget($) {
             const $size = $('.quiz-widget__solution-sub-heading[data-subtitle="size"]');
 
             const feelText = $feel.text().toLowerCase()
-                .replaceAll('it varies', 'medium')
+                .replaceAll('it varies', 'medium');
 
-            if($feel.text().toLowerCase().includes('not sure')) {
+            if($feel.text().trim() === 'Feel:' || $feel.text().toLowerCase().includes('not sure')) {
                 $feel.remove();
             } else {
                 $feel.text(feelText);
             }
 
-            if($size.text().toLowerCase().includes('not sure')) {
+            if($size.text().trim() === 'Size:' || $size.text().toLowerCase().includes('not sure')) {
                 $size.remove();
             }
         },
@@ -418,7 +418,19 @@ function quizWidget($) {
             if (leads.length) {
                 this._replacePlaceholders();
                 this._replaceButtons();
+                this._setEventListenersOnLeads();
             }
+        },
+
+        _setEventListenersOnLeads: function () {
+            $('textarea[maxlength]').on('keyup', function () {
+                const maxSymbols = +$(this).attr('maxlength');
+                const symbolsCount = this.value.length;
+
+                if(maxSymbols && symbolsCount >= maxSymbols) {
+                    quiz.msg(`Maximums characters length is ${maxSymbols}`);
+                }
+            });
         },
 
         _replacePlaceholders: function () {
