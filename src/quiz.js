@@ -428,7 +428,7 @@ function quizWidget($) {
                 const symbolsCount = this.value.length;
 
                 if(maxSymbols && symbolsCount >= maxSymbols) {
-                    quiz.msg(`Maximums characters length is ${maxSymbols}`);
+                    quiz.msg(`Maximum characters length is ${maxSymbols}`);
                 }
             });
         },
