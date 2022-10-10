@@ -594,8 +594,7 @@ function quizWidget($) {
                 questionIndexOfTotal.insertBefore(questionTitle);
                 $tab.append(learnMoreHtml);
                 progressBarItemText && progressBarHtml.find('.quiz-widget__progress-bar').append('<div class="quiz-widget__progress-bar-item">' + progressBarItemText + '</div>')
-                $('.quiz-widget__learn-more-image').css('background-image', learnMorePictureBackground);
-
+                learnMoreHtml.find('.quiz-widget__learn-more-image').css('background-image', learnMorePictureBackground);
                 learnMoreClose.on('click', function () {
                     this._triggerLearnMoreVisibility(false);
                 }.bind(this));
