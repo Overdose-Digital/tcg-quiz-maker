@@ -932,6 +932,7 @@ $screenM: 768px;
                         color: $colorGray1;
                         margin-bottom: 10px;
                         text-align: left;
+                        width: 100%;
 
                         @media screen and (min-width: $screenM + 1) {
                             display: none;

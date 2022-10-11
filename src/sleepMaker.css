@@ -825,6 +825,7 @@
   color: #777777;
   margin-bottom: 10px;
   text-align: left;
+  width: 100%;
 }
 @media screen and (min-width: 769px) {
   #quiz .quiz-widget__solution-links__popup-sub-title {
