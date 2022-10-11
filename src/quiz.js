@@ -288,6 +288,7 @@ function quizWidget($) {
                         this._buildLoadEmailMeResultsPopup();
                         this._loadReviews();
                         this.pushFormDataToDataLayer();
+                        $("html, body").animate({ scrollTop: 0 }, 'fast');
                     }
                 }.bind(this));
 
