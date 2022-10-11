@@ -288,7 +288,8 @@ function quizWidget($) {
                         this._buildLoadEmailMeResultsPopup();
                         this._loadReviews();
                         this.pushFormDataToDataLayer();
-                        $("html, body").animate({ scrollTop: 0 }, 'fast');
+                        localStorage.getItem('reloadedresults') && $("html, body").animate({ scrollTop: 0 }, 'fast');
+                        localStorage.setItem('reloadedresults', true);
                     }
                 }.bind(this));
 
