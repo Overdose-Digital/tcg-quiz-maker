@@ -284,12 +284,15 @@ function quizWidget($) {
                     this._removeBaseStyles();
 
                     if (this._isResultsStep()) {
+                        console.log(111);
                         this._fixTitle()
                         this._buildLoadEmailMeResultsPopup();
                         this._loadReviews();
                         this.pushFormDataToDataLayer();
-                        localStorage.getItem('reloadedresults') && $("html, body").animate({ scrollTop: 0 }, 'fast');
+                        !localStorage.getItem('reloadedresults') && $("html, body").animate({ scrollTop: 0 }, 'fast');
                         localStorage.setItem('reloadedresults', true);
+                    } else {
+                        localStorage.removeItem('reloadedresults');
                     }
                 }.bind(this));
 
