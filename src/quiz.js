@@ -284,7 +284,6 @@ function quizWidget($) {
                     this._removeBaseStyles();
 
                     if (this._isResultsStep()) {
-                        console.log(111);
                         this._fixTitle()
                         this._buildLoadEmailMeResultsPopup();
                         this._loadReviews();
