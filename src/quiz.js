@@ -443,7 +443,7 @@ function quizWidget($) {
                 {old: 'First Name', new: 'First name'},
                 {old: 'Last Name', new: 'Last name'},
                 {old: 'Email', new: 'Email address'},
-                {old: 'Enter text here', new: 'Tell us in 300 characters or less why you should win and what you would buy with the $500 Prezzee Gift Card.', maxlength: '300'}
+                {old: 'Enter text here', new: 'Tell us in 300 characters or less why you should win and what you would buy with the $5000 Prezzee Gift Card.', maxlength: '300'}
             ]
 
             for (var i in placeholders) {
