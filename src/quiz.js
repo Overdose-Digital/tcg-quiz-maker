@@ -27,7 +27,8 @@ function quizWidget($) {
             solutionLinksWrapper: '.quiz-widget__solution-links__wrapper',
             solutionLink: '.quiz-widget__solution-link',
             solutionShift: '.quiz-widget__solution-shift',
-            reviewsPageSwitcher: '.reviews-page__switch-page'
+            reviewsPageSwitcher: '.reviews-page__switch-page',
+            leadGenPlaceholder: config.leadGenPlaceholder || 'Tell us in 300 characters or less why you should win and what you would buy with the $5000 Prezzee Gift Card.'
         },
 
         _loadQuiz: function () {
@@ -443,7 +444,7 @@ function quizWidget($) {
                 {old: 'First Name', new: 'First name'},
                 {old: 'Last Name', new: 'Last name'},
                 {old: 'Email', new: 'Email address'},
-                {old: 'Enter text here', new: 'Tell us in 300 characters or less why you should win and what you would buy with the $5000 Prezzee Gift Card.', maxlength: '300'}
+                {old: 'Enter text here', new: this.options.leadGenPlaceholder, maxlength: '300'}
             ]
 
             for (var i in placeholders) {
@@ -462,10 +463,11 @@ function quizWidget($) {
 
         _updateProgressBar: function (index) {
             var tabs = this._getTabs();
-            var currentIndex = index || +(tabs.siblings('.sel').attr('tid'));
-            var progressBarItems = $(this.options.progressBarItems);
             var activeClass = 'active';
-            var percents = (currentIndex / tabs.length) * 100;
+            var currentIndex = index || +(tabs.siblings('.sel').attr('tid'));
+            var tabIndex = +tabs.eq(currentIndex - 1).attr('data-index');
+            var progressBarItems = $(this.options.progressBarItems);
+            var percents = ((tabIndex - 1) / +progressBarItems.length) * 100;
 
             $(this.options.progressLine).css({
                 width: percents + '%'
@@ -473,7 +475,7 @@ function quizWidget($) {
 
             progressBarItems.removeClass(activeClass);
 
-            var activeItem = progressBarItems.eq(currentIndex - 1);
+            var activeItem = $(this.options.progressBarItems + '[data-index="'+ tabIndex +'"]');
             var offset = activeItem.offset();
             activeItem.addClass(activeClass);
 
@@ -548,9 +550,41 @@ function quizWidget($) {
             return $(this.options.quizTabs + '>div');
         },
 
+        _gatTabsFilteredLength: function () {
+            var $tabs = this._getTabs();
+            var options = this.options;
+            var tabsLength = 0;
+
+            $.each($tabs, function (i, tab) {
+                var $tab = $(tab);
+                var $prevTab = $tab.prev();
+                var $questionTitle = $tab.find(options.questionTitle);
+                var $dataTag = $questionTitle.find('code');
+                var progressBarItemText = $dataTag.data('progressbar');
+                var sameTab = $prevTab.length && $prevTab.find(options.questionTitle + ' code[data-progressbar='+ progressBarItemText +']' ).length > 0;
+
+                if(!sameTab) {
+                    tabsLength++;
+                }
+
+                this._setTabIndex($tab, tabsLength);
+            }.bind(this));
+
+            return tabsLength;
+        },
+
+        _setTabIndex: function ($tab, tabsLength) {
+            $tab.attr('data-index', tabsLength);
+        },
+
         _updateQuestionsHtml: function () {
             var quizTabs = this._getTabs();
             var options = this.options;
+            var tabsLength = this._gatTabsFilteredLength();
+
+            if(!tabsLength) {
+                return;
+            }
 
             var progressBarHtml = $(
                 '<div style="display: none" class="' + options.progressBarWrapperClass + '">' +
@@ -565,11 +599,12 @@ function quizWidget($) {
             $.each(quizTabs, function (i, tab) {
                 var $tab = $(tab);
                 var questionTitle = $tab.find(options.questionTitle);
-                var questionIndexOfTotal = $('<div class="quiz-widget__question-index-of-total-text">' + 'Question ' + (i + 1) + ' of ' + quizTabs.length + '</div>');
                 var dataTag = questionTitle.find('code');
                 var learnMoreTitle = dataTag.data('title');
                 var learnMoreText = dataTag.data('text');
                 var progressBarItemText = dataTag.data('progressbar');
+                var questionIndex = $tab.data('index');
+                var questionIndexOfTotal = $('<div class="quiz-widget__question-index-of-total-text">' + 'Question ' + questionIndex + ' of ' + tabsLength + '</div>');
                 var learnMorePicture = $tab.find(options.questionPicture);
                 var learnMorePictureBackground = learnMorePicture.css('background-image');
                 var learnMoreOpen = $('<button class="quiz-widget__learn-more-open"></button>');
@@ -597,7 +632,13 @@ function quizWidget($) {
                 questionTitle.find('>div:first-child').append(learnMoreOpen);
                 questionIndexOfTotal.insertBefore(questionTitle);
                 $tab.append(learnMoreHtml);
-                progressBarItemText && progressBarHtml.find('.quiz-widget__progress-bar').append('<div class="quiz-widget__progress-bar-item">' + progressBarItemText + '</div>')
+
+                if(progressBarItemText && progressBarHtml) {
+                    var isAlreadyExist = progressBarHtml.find('[data-index="'+ questionIndex +'"]').length > 0;
+
+                    !isAlreadyExist && progressBarHtml.find('.quiz-widget__progress-bar').append('<div class="quiz-widget__progress-bar-item" data-index="'+ questionIndex +'">' + progressBarItemText + '</div>')
+                }
+
                 learnMoreHtml.find('.quiz-widget__learn-more-image').css('background-image', learnMorePictureBackground);
                 learnMoreClose.on('click', function () {
                     this._triggerLearnMoreVisibility(false);
