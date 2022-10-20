@@ -283,8 +283,15 @@ $screenM: 768px;
             padding: 0 20px;
 
             button,
+            textarea,
             input {
                 font-family: $fontFamilyPrimary;
+            }
+
+            textarea,
+            input {
+                display: block;
+                appearance: auto;
             }
 
             #quiz-tabs {
@@ -1065,6 +1072,9 @@ $screenM: 768px;
                     &-image {
                         img {
                             display: block;
+                            max-width: initial;
+                            width: 123px;
+                            height: auto;
                         }
                     }
 

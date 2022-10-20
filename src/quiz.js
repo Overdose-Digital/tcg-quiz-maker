@@ -77,8 +77,10 @@ function quizWidget($) {
             var questinsHtml = '';
 
             $.each(questions, function (i, question) {
+                console.log(question.question);
                 if(
                     question.question.includes('terms-and-conditions') ||
+                    question.question.includes('Terms and Conditions') ||
                     question.question.includes('Tell us')
                 ) {
                     return;

@@ -2,7 +2,7 @@
 npm install uglify-js -g
 
 ### Apply uglify js
-uglifyjs src/quiz.js --output dist/quizV1.1.7.min.js -c -m
+uglifyjs src/quiz.js --output dist/quizV1.4.4.min.js -c -m
 
 ### Install uglify css
 npm install -g uglifycss

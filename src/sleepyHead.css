@@ -225,8 +225,14 @@
   padding: 0 20px;
 }
 #quiz .quiz-widget__wrapper button,
+#quiz .quiz-widget__wrapper textarea,
 #quiz .quiz-widget__wrapper input {
   font-family: "Calibre";
+}
+#quiz .quiz-widget__wrapper textarea,
+#quiz .quiz-widget__wrapper input {
+  display: block;
+  appearance: auto;
 }
 #quiz .quiz-widget__wrapper #quiz-tabs h3,
 #quiz .quiz-widget__wrapper #quiz-tabs .qp_qi > div {
@@ -937,6 +943,9 @@
 }
 #quiz .quiz-widget__upgrades-item-card-image img {
   display: block;
+  max-width: initial;
+  width: 123px;
+  height: auto;
 }
 #quiz .quiz-widget__upgrades-item-card-content {
   display: flex;
