@@ -3,6 +3,32 @@
   overflow: hidden;
 }
 
+body[tend-1="1"] #quiz-tabs ~ .qp_bo #quiz-end {
+  display: block;
+  text-decoration: none;
+}
+body[tend-1="1"] #quiz-tabs ~ .qp_bo #quiz-end input {
+  font-family: "Calibre";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px auto 0;
+  padding: 16px 10px 10px;
+  background: #2E1A47;
+  border-radius: 4px;
+  text-transform: uppercase;
+  color: #fff;
+  width: 100%;
+  max-width: 244px;
+  min-height: 50px;
+  border: 0;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
 .qp-win {
   display: none;
 }
@@ -826,6 +852,8 @@
   text-transform: uppercase;
   color: #2E1A47;
   margin-bottom: 12px;
+  height: 30px;
+  overflow: hidden;
 }
 @media screen and (max-width: 768px) {
   #quiz .quiz-widget__why-is-perfect-item-title {
@@ -1398,6 +1426,9 @@
 }
 #quiz-tabs > div {
   width: 100%;
+}
+#quiz-tabs > div .qp_btnok {
+  display: none;
 }
 #quiz-tabs [tid="7"] .qp_ao,
 #quiz-tabs [tid="5"] .qp_ao,

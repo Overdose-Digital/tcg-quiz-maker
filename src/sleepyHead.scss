@@ -37,6 +37,40 @@ $screenM: 768px;
     overflow: hidden;
 }
 
+//body[tidx-1='1'] #quiz-back,
+//body[tend-1='1']:not([first='1']):not([last='0']) #quiz-next,
+//body:not([tend-1='1']):not([last='1']) #quiz-end,
+//body:not([startp='1']) #quiz-start,body[startp='1'] #quiz-next,body:not([tend-1='1']):not([last='1']) .qp_bo #quiz-results {
+//    display: none
+//}
+
+body[tend-1='1'] #quiz-tabs ~.qp_bo  #quiz-end {
+    display: block;
+    text-decoration: none;
+
+    input {
+        font-family: $fontFamilyPrimary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 25px auto 0;
+        padding: 16px 10px 10px;
+        background: $colorBlue2;
+        border-radius: 4px;
+        text-transform: uppercase;
+        color: $colorWhite;
+        width: 100%;
+        max-width: 244px;
+        min-height: 50px;
+        border: 0;
+        font-weight: $fontWeightSemiBold;
+        font-size: 15px;
+        line-height: 18px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+}
+
 .qp-win {
     display: none;
 
@@ -933,6 +967,8 @@ $screenM: 768px;
                     text-transform: uppercase;
                     color: $colorBlue2;
                     margin-bottom: 12px;
+                    height: 30px;
+                    overflow: hidden;
 
                     @media screen and (max-width: $screenM) {
                         font-size: 14px;
@@ -1575,6 +1611,10 @@ $screenM: 768px;
 
     & > div {
         width: 100%;
+
+        .qp_btnok {
+            display: none;
+        }
     }
 
     [tid='7'],
