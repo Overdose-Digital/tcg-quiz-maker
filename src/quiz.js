@@ -391,7 +391,7 @@ function quizWidget($) {
 
                 }
 
-                if(q.question.indexOf('tips') !== -1 ) {
+                if(q.question && q.question.indexOf('tips') !== -1 ) {
                     dataLayer.email_optin = !!q.answers[0].answer
                 }
             }
