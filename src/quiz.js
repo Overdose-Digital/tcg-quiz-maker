@@ -129,6 +129,11 @@ function quizWidget($) {
 
 
             $('#quiz').append(formHtml);
+            var el = $('input[placeholder="Lead Capture Form Flag"]');
+            if (el.length) {
+                el.parent().parent().hide();
+                el.val('resultform');
+            }
         },
 
         _sendForm: function () {
@@ -210,6 +215,10 @@ function quizWidget($) {
                 errorMessage = '';
 
                 if(+id === 12748425) {
+                    return true
+                }
+
+                if(+id === 13709975) {
                     return true
                 }
 
@@ -423,6 +432,7 @@ function quizWidget($) {
             var leads = $('#quiz-ntabs');
 
             if (leads.length) {
+                this._processFlagLeadFormData();
                 this._replacePlaceholders();
                 this._replaceButtons();
                 this._setEventListenersOnLeads();
@@ -436,6 +446,22 @@ function quizWidget($) {
 
                 if(maxSymbols && symbolsCount >= maxSymbols) {
                     quiz.msg(`Maximum characters length is ${maxSymbols}`);
+                }
+            });
+        },
+
+        _processFlagLeadFormData: function () {
+            var questionTitle = $('#quiz-ntabs').find(this.options.questionTitle);
+            var el = null;
+            $.each(questionTitle, function( index, value ) {
+                if ($(value).text() == 'Lead Capture Form Flag') {
+                    var parentEl = $(value).parent().parent();
+                    parentEl.hide();
+                    el = parentEl.find( "input" );
+                    if (el.length) {
+                        el.attr('flagleadform', 1);
+                        el.val('leadform')
+                    }
                 }
             });
         },
