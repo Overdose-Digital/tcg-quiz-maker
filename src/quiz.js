@@ -1,5 +1,6 @@
 function quizWidget($) {
     var config = $('[data-quiz-config]').data('quizConfig');
+    var odResult = [];
 
     var quizWidgetObject = {
         options: {
@@ -165,6 +166,7 @@ function quizWidget($) {
                 } else {
                     queryString = 'Ñ' + id + '¦' + '999' + '¦' + value;
                 }
+                odResult[id] = value;
 
                 decodedJson.ans += queryString;
             }.bind(this));
@@ -174,26 +176,38 @@ function quizWidget($) {
 
             for (var p in decodedJson) {
                 if (decodedJson.hasOwnProperty(p)) {
+                    if (p === 'track') {
+                        odResult['id'] = decodedJson[p]
+                    }
                     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(decodedJson[p]));
                 }
             }
 
+            odResult['isOdRequest'] = true;
+
+
+            var odParams = [];
+            for (var odp in odResult) {
+                odParams.push(encodeURIComponent(odp) + "=" + encodeURIComponent(odResult[odp]));
+            }
+
             var queryString = str.join("&");
 
-            this._sendRequest(queryString).then(function () {
+            this._sendRequest(odParams).then(function () {
                 this._triggerFormVisibility(false);
+                $('.' + this.options.formSubmitButtonClass).prop('disabled', false);
             }.bind(this), function (error) {
-                console.error(error)
                 this._triggerFormVisibility(false);
+                $('.' + this.options.formSubmitButtonClass).prop('disabled', false);
             }.bind(this));
         },
 
         _sendRequest: async function (queryString) {
-            let send = await quiz.xSend({
-                s: this.leadsObject.s,
-                d: queryString,
-                cb: quiz.gcpCB,
-                noLog: 1
+            $('.' + this.options.formSubmitButtonClass).prop('disabled', true);
+            let send = $.ajax({
+                type: 'POST',
+                url: config.webhookUrl + '?' + queryString.join("&"),
+                dataType: 'jsonp',
             });
 
             return await send;
@@ -223,6 +237,7 @@ function quizWidget($) {
                 }
 
                 if(isEmail) {
+                    odResult['email'] = value;
                     errorMessage = 'Please provide correct email address';
                 }else {
                     if(isCheckbox) {
@@ -459,8 +474,12 @@ function quizWidget($) {
                     parentEl.hide();
                     el = parentEl.find( "input" );
                     if (el.length) {
+                        var currentUrl = window.location.href;
+                        var paramList = currentUrl.split('#')
+
                         el.attr('flagleadform', 1);
-                        el.val('leadform')
+                        el.val('leadform' + paramList[1])
+
                     }
                 }
             });
@@ -968,6 +987,6 @@ function incertUserIPDetector () {
             }
 
             m.parentNode.insertBefore(a, m);
-        })(window, document, "script", "//take.quiz-maker.com/3012/CDN/quiz-embed-v1.js", "qp");
+        })(window, document, "script", "https://take.quiz-maker.com/3012/CDN/quiz-embed-v1.js", "qp");
     }
 })();
