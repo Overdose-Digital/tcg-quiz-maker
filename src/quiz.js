@@ -204,13 +204,7 @@ function quizWidget($) {
 
         _sendRequest: async function (queryString) {
             $('.' + this.options.formSubmitButtonClass).prop('disabled', true);
-            let send = $.ajax({
-                type: 'POST',
-                url: config.webhookUrl + '?' + queryString.join("&"),
-                dataType: 'jsonp',
-            });
-
-            return await send;
+            fetch(config.webhookUrl + '?' + queryString.join("&"), { mode: "no-cors" });
         },
 
         _validateForm: function (questions) {
