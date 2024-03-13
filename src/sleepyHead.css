@@ -250,7 +250,7 @@ body[tend-1="1"] #quiz-tabs ~ .qp_bo #quiz-end input {
   width: 100%;
   background: #E4E9EB;
   padding: 0 20px;
-  height: 750px;
+  min-height: 750px;
 }
 #quiz .quiz-widget__wrapper button,
 #quiz .quiz-widget__wrapper textarea,
