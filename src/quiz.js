@@ -7,7 +7,12 @@ function quizWidget($) {
             mobileBreakpoint: 768,
             getStartedButtonClass: 'quiz-widget__get-started-button',
             getStartedContainerClass: 'quiz-widget__get-started',
+            getFooterContainerClass: 'quiz-widget__footer',
             getStartedText: config.getStartedText || 'Not sure which bed you need? Take our quick Sleep Selector quiz and we\'ll recommend the right bed for you.',
+            getStartedTextFirstParagraph: config.getStartedTextFirstParagraph || 'Embarking on a journey towards perfect sleep begins with choosing the right mattress, a task made simpler with Sleepyhead\'s Sleep Selector. This innovative tool asks insightful questions about your sleeping habits and preferences, guiding you to a personalised Sleepyhead bed recommendation.',
+            getStartedTextSecondParagraph: config.getStartedTextSecondParagraph || 'Through this tailored approach, finding your perfect sleep solution turns your dreams into reality.',
+            getStartedTextThirdParagraph: config.getStartedTextThirdParagraph || 'Why the right mattress is key to a good sleep',
+            getStartedTextFourthParagraph: config.getStartedTextFourthParagraph || 'Finding the right mattress is a cornerstone of achieving optimal sleep, impacting everything from our physical well-being to our mental health. It serves not just as a platform for rest but as a tool for enhancing the quality of our sleep. A suitable mattress adapts to the contours of the body, providing support where it\'s needed most. Sleepyhead embodies the belief that the right mattress is essential for a better quality of life.',
             quizTabs: '#quiz-tabs',
             questionTitle: '.qp_qi',
             questionPicture: '.qp_pic',
@@ -704,15 +709,33 @@ function quizWidget($) {
                 quizTimeText +
                 '</div>' +
 
-                '<div class="quiz-widget__get-started-text">' +
+                '<div class="quiz-widget__get-started-text quiz-widget__get-first-paragraph-text">' +
+                this.options.getStartedTextFirstParagraph +
+                '</div>' +
+
+                '<div class="quiz-widget__get-started-text quiz-widget__get-second-paragraph-text">' +
+                this.options.getStartedTextSecondParagraph +
+                '</div>' +
+
+                '<div class="quiz-widget__get-started-text quiz-widget__bold">' +
                 this.options.getStartedText +
                 '</div>' +
 
                 '<button class=' + this.options.getStartedButtonClass + '>Get started</button>' +
                 '</div>';
 
+            var footerHtml = '<div class=' + this.options.getFooterContainerClass + '>' +
+                '<div class="quiz-widget__footer quiz-widget__get-third-paragraph-text">' +
+                this.options.getStartedTextThirdParagraph +
+                '</div>' +
+
+                '<div class="quiz-widget__get-started-text quiz-widget__get-fourth-paragraph-text">' +
+                this.options.getStartedTextFourthParagraph +
+                '</div>';
+
             $('.' + this.options.getStartedContainerClass).remove();
             $('.' + config.quizWrapper).prepend(html);
+            $('#quiz-widget-footer').prepend(footerHtml);
         },
 
 
@@ -855,6 +878,9 @@ function quizWidget($) {
         _triggerGetStartedVisibility: function (isVisible) {
             $('.' + this.options.getStartedContainerClass).toggle(isVisible);
         },
+        _triggerFooterParagraphVisibility: function (isVisible) {
+            $('.' + this.options.getFooterContainerClass).toggle(isVisible);
+        },
 
         _triggerFormVisibility: function (isVisible) {
             $('body').toggleClass('quiz-body-overflowed', isVisible);
@@ -869,6 +895,7 @@ function quizWidget($) {
             this._triggerQuizContainerVisibility(true);
             this._triggerProgressBarVisibility(true);
             this._triggerGetStartedVisibility(false);
+            this._triggerFooterParagraphVisibility(false);
             this._updateProgressBar();
 
             window.dataLayer.push({
